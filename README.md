@@ -6,7 +6,7 @@
 * npm i
 * cd ../backend
 * php artisan serve --port=8080
-* cd frontend
+* cd ../frontend
 * npm run start (it opens the app at localhost:3000)
 
 ### Additional Commands
