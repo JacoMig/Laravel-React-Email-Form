@@ -13,5 +13,5 @@
 * npm i
 * npm run start (it opens the app at localhost:3000)
 
-### Additional Commands
+### Additional Commands on the frontend
 * npm run lint
