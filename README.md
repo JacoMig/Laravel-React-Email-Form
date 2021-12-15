@@ -5,8 +5,9 @@
 * cd Laravel-React-Email-Form
 * git checkout develop
 * cd backend
+* composer install
 * php artisan serve --port=8080
-* cd ../frontend
+* open another bash on Laravel-React-Email-Form/frontend
 * npm i
 * npm run start (it opens the app at localhost:3000)
 
