@@ -1,7 +1,8 @@
 # Laravel-React-Email-Form
 ### node version 12.13.0, frontend uses create react app
 ### Steps for installation
-* git clone git@github.com:JacoMig/Laravel-React-Email-Form.git
+* git clone git@github.com:JacoMig/Laravel-React-Email-Form.git into an htdocs of a server (i used xampp)
+* start the server
 * cd Laravel-React-Email-Form/frontend
 * npm i
 * cd ../backend
