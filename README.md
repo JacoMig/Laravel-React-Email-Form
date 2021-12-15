@@ -6,6 +6,7 @@
 * git checkout develop
 * cd backend
 * composer install
+* cp .env.example .env
 * php artisan serve --port=8080
 * open another bash on Laravel-React-Email-Form/frontend
 * npm i
