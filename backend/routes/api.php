@@ -19,20 +19,31 @@ use App\DatabaseJson\Models\User;
 }); */
 
 
-Route::get('/users/create', function(){
-   
-    $user = User::create([
-        'name' => 'alvin',
-        'surname' => 'alvinozzi',
-        'email' => 'alvin@blabla.com'
+Route::post('/users/create', function(Request $request){
+    
+    $request->validate([
+        'email' => 'required|email',
+        'name' => 'required',
+        'surname' => 'required'
     ]);
+
+    $existingUsers = User::where('email',$request->email)->get();
+
+    if(count($existingUsers) > 0){
+        throw new \Exception('User already exists');
+    } else {
+        $user = User::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email
+        ]);
+        return 'OK';
+    }
 });
 
 Route::get('/users', function(){
    return User::all();
 });
 
-Route::get('/users/delete', function(){
-    $id = 1;
-    $user = User::delete();
-});
+
+

@@ -1,37 +1,44 @@
 import './App.scss';
-
-import React from 'react';
-
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import FormComponent from './components/FormComponent';
+import { FormValuesTypes } from './types';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Typescript React project boilerplate with ESLint and Prettier</h1>
-        <p>This project is initialized with Create React App</p>
-        <h2>This project is consisting of:</h2>
-        <ul>
-          <li>TypeScript</li>
-          <li>React (16+)</li>
-          <li>react-scripts (createReactApp)</li>
-          <li>react-testing-library (not Enzyme)</li>
-          <li>SASS/SCSS</li>
-          <li>ESLint (instead of deprecated TSLint)</li>
-          <li>Prettier</li>
-        </ul>
-        <a
-          className="App-link"
-          href="https://github.com/facebook/create-react-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Get more info on Create React App
-        </a>
-      </header>
-    </div>
-  );
+    const [response, setResponse] = useState({ success: false, message: '' });
+
+    const onSubmit = (e: React.FormEvent, formValues: FormValuesTypes): void => {
+        e.preventDefault();
+        setResponse({ success: true, message: '...sending request' });
+        axios
+            .post('http://localhost:8080/api/users/create', {
+                name: formValues['name'].value,
+                surname: formValues['surname'].value,
+                email: formValues['email'].value
+            })
+            .then(function (response) {
+                console.log(response);
+                response.status === 200
+                    ? setResponse({ success: true, message: 'User successfully created' })
+                    : setResponse({ success: false, message: '' });
+            })
+            .catch(function (error) {
+                console.log(error.response);
+                setResponse({ success: false, message: error.response.data.message });
+            });
+    };
+
+    return (
+        <div className="App">
+            <div className="App-header">
+                <a href={'http://localhost:8080/api/users'}>List of Users</a>
+                <FormComponent onSubmit={onSubmit} />
+                {response.message !== '' ? (
+                    <h4 className={`response ${!response.success ? 'red' : null}`}>{response.message}</h4>
+                ) : null}
+            </div>
+        </div>
+    );
 }
 
 export default App;
