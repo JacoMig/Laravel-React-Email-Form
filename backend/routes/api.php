@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\DatabaseJson\Models\User;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/* Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+}); */
+
+
+Route::get('/users/create', function(){
+   
+    $user = User::create([
+        'name' => 'alvin',
+        'surname' => 'alvinozzi',
+        'email' => 'alvin@blabla.com'
+    ]);
+});
+
+Route::get('/users', function(){
+   return User::all();
+});
+
+Route::get('/users/delete', function(){
+    $id = 1;
+    $user = User::delete();
 });
